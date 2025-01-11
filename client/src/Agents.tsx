@@ -5,17 +5,23 @@ import "./App.css";
 
 function Agents() {
     const navigate = useNavigate();
-    const { data: agents, isLoading } = useGetAgentsQuery()
+    const { data: agents, isLoading } = useGetAgentsQuery();
+
+    if (!isLoading && (!agents || agents.length === 0)) {
+        console.debug("No agents loaded.");
+    }
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center p-4">
             <h1 className="text-2xl font-bold mb-8">Select your agent:</h1>
 
             {isLoading ? (
-                <div>Loading agents...</div>
+                <div>Loading agents...????</div>
+            ) : !agents || agents.length === 0 ? (
+                <div>No agents available. Please try again later.</div>
             ) : (
                 <div className="grid gap-4 w-full max-w-md">
-                    {agents?.map((agent) => (
+                    {agents.map((agent) => (
                         <Button
                             key={agent.id}
                             className="w-full text-lg py-6"

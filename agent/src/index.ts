@@ -1,3 +1,4 @@
+//import { shioriCharacter } from "./shiori.character.ts"
 import { PostgresDatabaseAdapter } from "@elizaos/adapter-postgres";
 import { SqliteDatabaseAdapter } from "@elizaos/adapter-sqlite";
 import { AutoClientInterface } from "@elizaos/client-auto";
@@ -233,6 +234,7 @@ export async function loadCharacters(
     if (loadedCharacters.length === 0) {
         elizaLogger.info("No characters found, using default character");
         loadedCharacters.push(defaultCharacter);
+        //loadedCharacters.push(shioriCharacter);
     }
 
     return loadedCharacters;
@@ -755,6 +757,7 @@ const startAgents = async () => {
     const args = parseArguments();
     let charactersArg = args.characters || args.character;
     let characters = [defaultCharacter];
+    //let characters = [shioriCharacter];
 
     if (charactersArg) {
         characters = await loadCharacters(charactersArg);
